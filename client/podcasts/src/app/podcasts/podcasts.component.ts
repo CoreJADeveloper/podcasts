@@ -24,6 +24,8 @@ import { IAppState } from '../store/store.interface';
 export class PodcastsComponent implements OnInit {
   private _subscriptions: any = new Subscription();
 
+	audio: string = 'assets/images/audio.png';
+
 	constructor(
     private _podcastsService: PodcastsService,
     private ngRedux: NgRedux<IAppState>
