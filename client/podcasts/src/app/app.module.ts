@@ -9,6 +9,9 @@ import { StoreModule } from './store/store.module';
 
 // MODULES
 import { PodcastsModule } from './podcasts/podcasts.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import { PodcastsModule } from './podcasts/podcasts.module';
     HttpClientModule,
     AppRoutingModule,
     StoreModule,
-    PodcastsModule
+    PodcastsModule,
+    BrowserAnimationsModule,
+    MatToolbarModule
   ],
   providers: [ ],
   bootstrap: [ AppComponent ]
