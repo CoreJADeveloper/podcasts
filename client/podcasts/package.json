@@ -23,7 +23,6 @@
     "@angular/platform-browser-dynamic": "~8.2.13",
     "@angular/router": "~8.2.13",
     "flux-standard-action": "^2.1.1",
-    "ramda": "^0.27.0",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",

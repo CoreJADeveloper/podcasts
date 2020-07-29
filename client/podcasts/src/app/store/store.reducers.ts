@@ -3,9 +3,8 @@ import { composeReducers, defaultFormReducer } from '@angular-redux/form';
 import { routerReducer } from '@angular-redux/router';
 
 import { IAppState } from './store.interface';
-import { LOAD_PODCASTS } from '../podcasts/podcasts.actions';
 
-import { podcastsReducer } from '../podcasts/podcasts.reducer';
+import { podcastsReducer } from '../podcasts/store/podcasts.reducer';
 
 // export const rootReducer = (state: IAppState, action: Action) => {
 //   switch (action.type) {
@@ -20,5 +19,5 @@ export const rootReducer = composeReducers(
   defaultFormReducer(),
   combineReducers({
     podcasts: podcastsReducer(),
-    // router: routerReducer,
+    router: routerReducer
   }));

@@ -2,9 +2,6 @@ import { Component } from '@angular/core';
 
 import { NgRedux, select } from '@angular-redux/store';
 
-import { IAppState } from './store/store.interface';
-import { PodcastsAPIActions } from './podcasts/podcasts.actions';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,8 +12,8 @@ export class AppComponent {
 
   @select() podcasts;
 
-  constructor(private podcastsActions: PodcastsAPIActions){
+  constructor(){
     // this.ngRedux.dispatch({type: LOAD_PODCASTS});
-    this.podcastsActions.loadPodcasts();
+    // this.podcastsActions.loadPodcasts();
   }
 }

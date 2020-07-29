@@ -7,7 +7,8 @@ import { AppComponent } from './app.component';
 
 import { StoreModule } from './store/store.module';
 
-import { PodcastsAPIActions } from './podcasts/podcasts.actions';
+// MODULES
+import { PodcastsModule } from './podcasts/podcasts.module';
 
 @NgModule({
   declarations: [
@@ -17,9 +18,10 @@ import { PodcastsAPIActions } from './podcasts/podcasts.actions';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule
+    StoreModule,
+    PodcastsModule
   ],
-  providers: [ PodcastsAPIActions ],
+  providers: [ ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -1,0 +1,4 @@
+export const LOAD_PODCASTS = 'LOAD_PODCASTS';
+export const LOAD_STARTED = 'LOAD_STARTED';
+export const LOAD_SUCCEEDED = 'LOAD_SUCCEEDED';
+export const LOAD_FAILED = 'LOAD_FAILED';
