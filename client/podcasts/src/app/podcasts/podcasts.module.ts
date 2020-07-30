@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 // RELATED
 import { PodcastsComponent } from './podcasts.component';
 import { PodcastsService } from './podcasts.service';
+import { WaveSurferComponent } from './components/wavesurfer/wavesurfer.component';
 
 // MATERIAL
 import { MatIconModule } from '@angular/material/icon';
@@ -17,10 +18,12 @@ import { MatIconModule } from '@angular/material/icon';
 		MatIconModule
 	],
 	declarations: [
-		PodcastsComponent
+		PodcastsComponent,
+		WaveSurferComponent
 	],
 	exports: [
-		PodcastsComponent
+		PodcastsComponent,
+		WaveSurferComponent
 	],
   providers: [ PodcastsService, DatePipe ]
 })

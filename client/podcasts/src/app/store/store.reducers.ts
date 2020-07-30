@@ -6,15 +6,6 @@ import { IAppState } from './store.interface';
 
 import { podcastsReducer } from '../podcasts/store/podcasts.reducer';
 
-// export const rootReducer = (state: IAppState, action: Action) => {
-//   switch (action.type) {
-//     case LOAD_PODCASTS:
-//       return { podcasts: [ {_id: "dh232j4h", title: "Test", audioUrl: "test.com", numberOfListeners: 10, image: "image.com", creationDate: "25 June"} ] }
-//   }
-//
-//   return state;
-// };
-
 export const rootReducer = composeReducers(
   defaultFormReducer(),
   combineReducers({
