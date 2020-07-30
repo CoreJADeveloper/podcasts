@@ -1,7 +1,7 @@
 const podcastsModel = require('../../db/models/podcasts');
 
 let dummyPodcasts = () => {
-  const podcasts = ["Phasellus accumsan cursus", "In hac", "Nulla porta", "Phasellus gravida", "Vestibulum rutrum", "Vivamus elementum", "Maecenas egestas", "Phasellus tempus", "Phasellus viverra", "Cras non dolor"];
+  const podcasts = ["Phasellus accumsan cursus", "Sed a libero. In consectetuer turpis ut velit. ", "Phasellus nec sem in justo", "Praesent egestas neque eu", "Pellentesque habitant morbi tristique", "Mauris turpis nunc blandit", "Vestibulum ullamcorper mauris at", "Donec elit libero sodales", "Nulla consequat massa quis", "Duis lobortis massa quam"];
   const min = 1;
   const max = 100;
   const flag = [true, false];

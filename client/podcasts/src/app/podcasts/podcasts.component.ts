@@ -1,17 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 // SERVICES
 import { PodcastsService } from './podcasts.service';
 
 // SUBSCRIPTIONS
-import { Subscription } from 'rxjs';
+import { Subscription, Observable, Subject } from 'rxjs';
+import { map } from "rxjs/operators";
 
 // REDUX
-import { NgRedux, select } from '@angular-redux/store';
+import { NgRedux, select, select$ } from '@angular-redux/store';
+// import { pipe, values, sortBy, prop } from 'ramda';
 
 // STORE
 import { LOAD_STARTED, LOAD_SUCCEEDED, LOAD_FAILED } from './store/podcasts.actions';
 import { IAppState } from '../store/store.interface';
+import { IPodcast } from './store/podcasts.interface';
+
+// export const sortPodcasts = (animalDictionary$: Observable<{}>) =>
+//   animalDictionary$.pipe(map(values => {
+// 		console.log(values);
+// 		return values;
+// 	}));
 
 // COMPONENT
 @Component({
@@ -21,7 +30,15 @@ import { IAppState } from '../store/store.interface';
 })
 
 // CLASS
-export class PodcastsComponent implements OnInit {
+export class PodcastsComponent implements OnInit, OnDestroy {
+	@select('podcasts')
+  readonly podcasts$: Observable<any>;
+
+	featured$ = new Subject<IPodcast[]>();
+	trending$ = new Subject<IPodcast[]>();
+	highlighted$ = new Subject<IPodcast[]>();
+	favorite$ = new Subject<IPodcast[]>();
+
   private _subscriptions: any = new Subscription();
 
 	audio: string = 'assets/images/audio.png';
@@ -33,7 +50,23 @@ export class PodcastsComponent implements OnInit {
 
 	ngOnInit() {
     this._getPodcasts();
+		this._getPodcastsSubscriptions();
   }
+
+	ngOnDestroy(){
+		this._subscriptions.unsubscribe();
+	}
+
+	private _getPodcastsSubscriptions(){
+		this._subscriptions.add(this.podcasts$.subscribe((res) => {
+			if(res){
+				this.featured$.next(res.podcasts['featured']);
+				this.trending$.next(res.podcasts['trending']);
+				this.highlighted$.next(res.podcasts['highlighted']);
+				this.favorite$.next(res.podcasts['favorite']);
+			}
+		}))
+	}
 
   private _getPodcasts(){
     this.ngRedux.dispatch({type: LOAD_STARTED});
@@ -44,5 +77,9 @@ export class PodcastsComponent implements OnInit {
     }, (error) => {
 			this.ngRedux.dispatch({type: LOAD_FAILED, error: error});
 		}));
+  }
+
+	getKey(_, podcast: IPodcast) {
+    return podcast._id;
   }
 }
