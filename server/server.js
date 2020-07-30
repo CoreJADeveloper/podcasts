@@ -2,22 +2,18 @@ const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const routes = require('./routes/router');
+const podcastsMiddlewares = require('./routes/middlewares/podcasts');
 const app = express();
-// let public_directory = './public/images';
 
-// require('./db/index');
+global.__basedir = __dirname;
+
+require('./db/index');
 
 app.use(bodyParser.json());
 
-// STATIC FILES
-app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, '../client/podcasts/dist/browser')));
-
 // ROUTES
-
-app.get('*', (req, res) => {
-  return res.sendFile(path.join(__dirname, '../client/podcasts/dist/browser/index.html'))
-})
+app.use('/podcasts', podcastsMiddlewares.dummyPodcasts, routes);
 
 // START SERVER
 const port = process.env.PORT || '3001';
