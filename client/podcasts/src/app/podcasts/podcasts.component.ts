@@ -41,6 +41,8 @@ export class PodcastsComponent implements OnInit {
       if(res){
         this.ngRedux.dispatch({type: LOAD_SUCCEEDED, podcasts: res});
       }
-    }));
+    }, (error) => {
+			this.ngRedux.dispatch({type: LOAD_FAILED, error: error});
+		}));
   }
 }

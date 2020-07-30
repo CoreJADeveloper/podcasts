@@ -4,9 +4,9 @@ import { NgReduxModule, NgRedux } from '@angular-redux/store';
 
 import { createLogger } from 'redux-logger';
 
-import { IAppState, INITIAL_STATE } from './store.interface';
+import { IAppState } from './store.interface';
+import { INITIAL_STATE } from '../podcasts/store/podcasts.data';
 import { rootReducer } from './store.reducers';
-// import { RootEpics } from './epics';
 
 @NgModule({
   imports: [NgReduxModule],
@@ -15,8 +15,7 @@ import { rootReducer } from './store.reducers';
 
 export class StoreModule {
   constructor(
-    public store: NgRedux<IAppState>,
-    // rootEpics: RootEpics,
+    public store: NgRedux<IAppState>
   ) {
     store.configureStore(
       rootReducer,

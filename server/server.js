@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const routes = require('./routes/router');
+const cors = require('cors');
 const podcastsMiddlewares = require('./routes/middlewares/podcasts');
 const app = express();
 
@@ -12,8 +13,11 @@ require('./db/index');
 
 app.use(bodyParser.json());
 
+// CORS
+app.use(cors({origin:true,credentials: true}));
+
 // ROUTES
-app.use('/podcasts', podcastsMiddlewares.dummyPodcasts, routes);
+app.use('/api', podcastsMiddlewares.dummyPodcasts, routes);
 
 // START SERVER
 const port = process.env.PORT || '3001';

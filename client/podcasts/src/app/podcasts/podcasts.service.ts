@@ -16,7 +16,7 @@ export class PodcastsService {
 	constructor(private http: HttpClient) { }
 
   getPodcasts() {
-    return this.http.get('http://www.mocky.io/v2/59200c34110000ce1a07b598')
+    return this.http.get(`${api}/podcasts`)
 										.pipe(map((res: any) => res))
 										.pipe(catchError(this._errorHandler));
   }

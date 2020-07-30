@@ -2,7 +2,8 @@ import { combineReducers, Action } from 'redux';
 import { composeReducers, defaultFormReducer } from '@angular-redux/form';
 import { routerReducer } from '@angular-redux/router';
 
-import { IAppState, INITIAL_STATE } from '../../store/store.interface';
+import { IAppState } from '../../store/store.interface';
+import { INITIAL_STATE } from './podcasts.data';
 import { LOAD_STARTED, LOAD_SUCCEEDED, LOAD_FAILED } from './podcasts.actions';
 
 export function podcastsReducer() {
@@ -12,7 +13,7 @@ export function podcastsReducer() {
     switch (action.type) {
       case LOAD_STARTED:
         return {
-          podcasts: []
+          podcasts: INITIAL_STATE
         };
       case LOAD_SUCCEEDED:
         return {
@@ -20,7 +21,7 @@ export function podcastsReducer() {
         };
       case LOAD_FAILED:
         return {
-          podcasts: []
+          podcasts: INITIAL_STATE
         };
     }
 
