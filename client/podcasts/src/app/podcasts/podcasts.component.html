@@ -1,17 +1,4 @@
 <div class="podcasts">
-  <!-- <div class="podcasts__holder ">
-    <div class="podcasts__holder__intro">
-      <div class="podcasts__holder__intro__icon">
-        <h1>PODCAST</h1>
-      </div>
-      <div class="podcasts__holder__intro__info">
-        <h1>Happy HR'</h1>
-      </div>
-      <div class="podcasts__holder__intro__video">
-        <h1>Video</h1>
-      </div>
-    </div>
-  </div> -->
   <div class="podcasts__holder">
     <div class="podcasts__holder__items">
       <div class="podcasts__holder__items__featured__trending">
@@ -19,7 +6,7 @@
           <h1 class="podcasts__holder__items__featured__trending__podcast-title">Featured Podcast</h1>
 
           <div class="featured__trending__container">
-            <ng-container *ngFor="let podcast of featured$ | async; trackBy:getKey">
+            <ng-container *ngFor="let podcast of featured$ | async; let i = index; trackBy:getKey">
               <div class="podcasts__holder__items__featured__trending__podcast__item">
                 <img [src]="podcast.image" alt="No Img" width="146" height="146">
 
@@ -32,14 +19,15 @@
                     <p>{{podcast.title}}</p>
                   </div>
                   <div class="podcasts__holder__items__featured__trending__podcast__item__details__playback">
-                    <mat-icon aria-hidden="false" aria-label="Play Icon">play_circle_outline</mat-icon>
-                    <p>{{podcast.numberOfListeners}} Played</p>
+                    <mat-icon *ngIf="!playAudio[i]" aria-hidden="false" aria-label="Play Icon">play_circle_outline</mat-icon>
+                    <p *ngIf="!playAudio[i]">{{podcast.numberOfListeners}} Played</p>
+                    <wavesurfer *ngIf="playAudio[i]" [audio]="podcast.audioUrl" [play]="playAudio[i] ? true : false"></wavesurfer>
                   </div>
                 </div>
 
                 <div class="podcasts__holder__items__featured__trending__podcast__item__play">
-                  <mat-icon aria-hidden="false" aria-label="Play Icon">play_circle_filled</mat-icon>
-                  <mat-icon aria-hidden="false" aria-label="Pause Icon">pause_circle_filled</mat-icon>
+                  <mat-icon *ngIf="!playAudio[i]" aria-hidden="false" aria-label="Play Icon" (click)="triggerAudioPlayback(i)">play_circle_filled</mat-icon>
+                  <mat-icon *ngIf="playAudio[i]" aria-hidden="false" aria-label="Pause Icon" (click)="playAudio = {}">pause_circle_filled</mat-icon>
                 </div>
               </div>
             </ng-container>
@@ -79,7 +67,6 @@
         <h1 class="podcasts__holder__items__favorite__podcast-title">All time favorite</h1>
 
         <div class="favorite__container">
-
           <ng-container *ngFor="let podcast of favorite$ | async; trackBy:getKey">
             <div class="podcasts__holder__items__favorite__podcast__item">
               <img [src]="podcast.image" alt="No Img" width="418" height="418">
@@ -98,43 +85,7 @@
               </div>
             </div>
           </ng-container>
-
-          <!-- <div class="podcasts__holder__items__favorite__podcast__item">
-            <img [src]="audio" alt="No Img" width="418" height="418">
-
-            <div class="podcasts__holder__items__favorite__podcast__item__details">
-              <div class="podcasts__holder__items__favorite__podcast__item__details__header">
-                <p class="podcasts__holder__items__favorite__podcast__item__details__header-episode">EP 005</p>
-                <p class="podcasts__holder__items__favorite__podcast__item__details__header-date">8 July, 12:21 PM</p>
-              </div>
-              <div class="podcasts__holder__items__favorite__podcast__item__details__content">
-                <p>Pellentesque commodo eros a enim. </p>
-              </div>
-              <div class="podcasts__holder__items__favorite__podcast__item__details__playback">
-                <p>Quisque libero</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="podcasts__holder__items__favorite__podcast__item">
-            <img [src]="audio" alt="No Img" width="418" height="418">
-
-            <div class="podcasts__holder__items__favorite__podcast__item__details">
-              <div class="podcasts__holder__items__favorite__podcast__item__details__header">
-                <p class="podcasts__holder__items__favorite__podcast__item__details__header-episode">EP 005</p>
-                <p class="podcasts__holder__items__favorite__podcast__item__details__header-date">8 July, 12:21 PM</p>
-              </div>
-              <div class="podcasts__holder__items__favorite__podcast__item__details__content">
-                <p>Pellentesque commodo eros a enim. </p>
-              </div>
-              <div class="podcasts__holder__items__favorite__podcast__item__details__playback">
-                <p>Quisque libero</p>
-              </div>
-            </div>
-          </div> -->
-
         </div>
-
       </div>
     </div>
   </div>

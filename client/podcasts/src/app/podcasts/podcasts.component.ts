@@ -4,23 +4,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PodcastsService } from './podcasts.service';
 
 // SUBSCRIPTIONS
-import { Subscription, Observable, Subject } from 'rxjs';
+import { Subscription, Observable, Subject, timer } from 'rxjs';
 import { map } from "rxjs/operators";
 
 // REDUX
 import { NgRedux, select, select$ } from '@angular-redux/store';
-// import { pipe, values, sortBy, prop } from 'ramda';
 
 // STORE
 import { LOAD_STARTED, LOAD_SUCCEEDED, LOAD_FAILED } from './store/podcasts.actions';
 import { IAppState } from '../store/store.interface';
 import { IPodcast } from './store/podcasts.interface';
-
-// export const sortPodcasts = (animalDictionary$: Observable<{}>) =>
-//   animalDictionary$.pipe(map(values => {
-// 		console.log(values);
-// 		return values;
-// 	}));
 
 // COMPONENT
 @Component({
@@ -39,9 +32,9 @@ export class PodcastsComponent implements OnInit, OnDestroy {
 	highlighted$ = new Subject<IPodcast[]>();
 	favorite$ = new Subject<IPodcast[]>();
 
-  private _subscriptions: any = new Subscription();
+	playAudio: any = {};
 
-	audio: string = 'assets/images/audio.png';
+  private _subscriptions: any = new Subscription();
 
 	constructor(
     private _podcastsService: PodcastsService,
@@ -78,6 +71,13 @@ export class PodcastsComponent implements OnInit, OnDestroy {
 			this.ngRedux.dispatch({type: LOAD_FAILED, error: error});
 		}));
   }
+
+	triggerAudioPlayback(i: number){
+		this.playAudio = {};
+
+		const numbers = timer(300);
+		this._subscriptions.add(numbers.subscribe(x => this.playAudio[i] = !this.playAudio[i]));
+	}
 
 	getKey(_, podcast: IPodcast) {
     return podcast._id;
