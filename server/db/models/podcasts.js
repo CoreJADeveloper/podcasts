@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
-var podcastModel = {};
+let podcastModel = {};
 
-var podcastSchema = new Schema({
+let podcastSchema = new Schema({
   title: {
     type: String,
     required: true
@@ -40,16 +40,16 @@ let facetPodcastsByType = (type) => {
   ];
 }
 
-podcastModel.save_podcasts = async function(podcasts) {
-  var Podcast = podcast_schema_model;
+podcastModel.save_podcasts = (podcasts) => {
+  let Podcast = podcast_schema_model;
 
-  return await Podcast.insertMany(podcasts);
+  return Podcast.insertMany(podcasts);
 }
 
-podcastModel.get_podcasts = async function(){
-  var Podcast = podcast_schema_model;
+podcastModel.get_podcasts = () => {
+  let Podcast = podcast_schema_model;
 
-  return await Podcast.aggregate([
+  return Podcast.aggregate([
     {
       $facet: {
         featured: facetPodcastsByType('featured'),
@@ -61,10 +61,10 @@ podcastModel.get_podcasts = async function(){
   ]);
 }
 
-podcastModel.get_podcasts_count = async function(){
-  var Podcast = podcast_schema_model;
+podcastModel.get_podcasts_count = () => {
+  let Podcast = podcast_schema_model;
 
-  return await Podcast.estimatedDocumentCount();
+  return Podcast.estimatedDocumentCount();
 }
 
 module.exports = podcastModel;
