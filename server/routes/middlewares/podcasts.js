@@ -21,22 +21,20 @@ let dummyPodcasts = () => {
   return podcastsData;
 }
 
-module.exports.dummyPodcasts = (req, res, next) => {
-  let get_podcasts_count_promise = podcastsModel.get_podcasts_count();
+module.exports.dummyPodcasts = async (req, res, next) => {
+  let result = await podcastsModel.get_podcasts_count();
 
-  get_podcasts_count_promise.then((result) => {
-    if(result === 0){
-      let podcasts = dummyPodcasts();
+  if(result === 0){
+    let podcasts = dummyPodcasts();
 
-      let save_podcasts_promise = podcastsModel.save_podcasts(podcasts);
+    let save_podcasts_promise = podcastsModel.save_podcasts(podcasts);
 
-      save_podcasts_promise.then((result) => {
-        if(result){
-          next();
-        }
-      });
-    } else {
-      next();
-    }
-  })
+    save_podcasts_promise.then((result) => {
+      if(result){
+        next();
+      }
+    });
+  } else {
+    next();
+  }
 }

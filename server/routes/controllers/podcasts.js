@@ -7,16 +7,12 @@ require('dotenv').config();
 
 let emptyPodcasts = { featured: [], highlighted: [], trending: [], favorite: [] };
 
-exports.get_podcasts = (req, res, next) => {
-  let get_podcasts_promise = podcastsModel.get_podcasts();
+exports.get_podcasts = async (req, res, next) => {
+  let result = await podcastsModel.get_podcasts();
 
-  get_podcasts_promise.then((result) => {
-    if(result && result.length > 0){
-      res.status(200).json(result[0]);
-    } else {
-      res.status(200).json(emptyPodcasts);
-    }
-  }).catch(function(err) {
-    res.status(500).json({"error": err});
-  });
+  if(result && result.length > 0){
+    res.status(200).json(result[0]);
+  } else {
+    res.status(200).json(emptyPodcasts);
+  }
 }
