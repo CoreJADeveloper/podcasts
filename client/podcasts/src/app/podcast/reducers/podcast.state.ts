@@ -1,11 +1,5 @@
-export interface PodcastState {
-  list: object;
-  isLoading: boolean;
-  isListLoading: boolean;
-}
+import { PodcastList } from './../model/podcast-list.model';
 
-export const initialState: PodcastState = {
-  list: {},
-  isLoading: false,
-  isListLoading: false
-};
+export interface PodcastState {
+  podcast: PodcastList;
+}

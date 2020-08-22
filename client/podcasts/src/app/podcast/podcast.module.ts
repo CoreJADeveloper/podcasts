@@ -18,7 +18,7 @@ import { PodcastRoutes } from './podcast.routing';
 	imports: [
 		CommonModule,
 		PodcastRoutes,
-		StoreModule.forFeature('podcasts', podcastReducer),
+		StoreModule.forFeature('podcast', podcastReducer),
 		MatIconModule
 	],
 	declarations: [

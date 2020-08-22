@@ -1,33 +1,41 @@
 import { All, PodcastActionTypes } from '../actions/podcast.actions';
-import { initialState, PodcastState } from './podcast.state';
+import { PodcastState } from './podcast.state';
+import { PodcastList } from './../model/podcast-list.model';
 
-
-export function podcastReducer(state = initialState, action: All): PodcastState {
+export function podcastReducer(state: PodcastList, action: All) {
   switch (action.type) {
     case PodcastActionTypes.LIST_PODCASTS: {
       return {
         ...state,
-        list: {},
-        isListLoading: true
+        podcasts: {
+          featured: [],
+          trending: [],
+          favorite: [],
+          highlighted: []
+        }
       };
     }
     case PodcastActionTypes.LIST_PODCASTS_SUCCESS: {
       return {
         ...state,
-        list: action.payload,
-        isListLoading: false
+        podcasts: action.payload
       };
     }
 
     case PodcastActionTypes.LIST_PODCASTS_FAILURE: {
       return {
         ...state,
-        isLoading: false
+        podcasts: {
+          featured: [],
+          trending: [],
+          favorite: [],
+          highlighted: []
+        }
       };
     }
 
     default: {
-        return state;
+      return state;
     }
   }
 }

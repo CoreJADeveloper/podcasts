@@ -1,10 +1,10 @@
-import { PodcastState } from '../../podcast/reducers/podcast.state';
-import { podcastReducer } from '../../podcast/reducers/podcast.reducer';
+import { PodcastState } from './../../podcast/reducers/podcast.state';
+import { podcastReducer } from './../../podcast/reducers/podcast.reducer';
 
 export interface AppState {
-    podcast: PodcastState;
+  podcast: PodcastState;
 }
 
 export const appReducers = {
-    podcast: podcastReducer
+  podcast: podcastReducer
 };
