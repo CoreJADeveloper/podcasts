@@ -1,4 +1,4 @@
-export interface IPodcast {
+export interface Podcast {
   _id: string;
   title: string;
   audioUrl: string;
