@@ -26,13 +26,4 @@ export class PodcastEffects {
       );
     })
   );
-
-  @Effect({dispatch: false})
-  error: Observable<any> = this.actions.pipe(
-    ofType(
-      PodcastActionTypes.LIST_PODCASTS_FAILURE),
-    tap((action: ActionTemplate<ErrorAction>) => {
-      // EMPTY
-    })
-  );
 }
